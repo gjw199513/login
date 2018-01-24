@@ -7,7 +7,7 @@ from scrapy.http import FormRequest
 class ProfileSpider(scrapy.Spider):
     name = 'profile'
     # 允许的爬取域
-    allowed_domains = ['http://example.webscraping.com']
+    allowed_domains = ['example.webscraping.com']
     # 其实爬取位置
     start_urls = ['http://example.webscraping.com/places/default/user/profile?_next=/places/default/index']
 
