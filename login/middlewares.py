@@ -56,3 +56,24 @@ class LoginSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
+# 实现cookies登录
+from scrapy.downloadermiddlewares.cookies import CookiesMiddleware
+import browsercookie
+
+
+class BrowserCookiesMiddleware(CookiesMiddleware):
+
+    def __init__(self, debug=False):
+        super().__init__(debug)
+        self.load_browser_cookies()
+
+    def load_browser_cookies(self):
+        # chrome浏览器cookie记录
+        chrome_jar = self.jars['chrome']
+        for c in browsercookie.chrome():
+            chrome_jar.set_cookie(c)
+
+        # firefox浏览器cookie记录
+        firefox_jar = self.jars['firefox']
+        for c in browsercookie.firefox():
+            firefox_jar.set_cookie(c)
